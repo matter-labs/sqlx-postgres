@@ -2,11 +2,15 @@
 name = "sqlx-postgres"
 documentation = "https://docs.rs/sqlx"
 description = "PostgreSQL driver implementation for SQLx. Not for direct use; see the `sqlx` crate for details."
-version.workspace = true
-license.workspace = true
-edition.workspace = true
-authors.workspace = true
-repository.workspace = true
+version = "0.8.6"
+license = "MIT OR Apache-2.0"
+edition = "2021"
+authors = [
+    "Ryan Leckey <leckey.ryan@gmail.com>",
+    "Austin Bonander <austin.bonander@gmail.com>",
+    "Chloe Ross <orangesnowfox@gmail.com>",
+]
+repository = "https://github.com/launchbadge/sqlx"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [features]
@@ -40,23 +44,23 @@ md-5 = { version = "0.10.0", default-features = false }
 rand = { version = "0.8.4", default-features = false, features = ["std", "std_rng"] }
 sha2 = { version = "0.10.0", default-features = false }
 
-# Type Integrations (versions inherited from `[workspace.dependencies]`)
-bigdecimal = { workspace = true, optional = true }
-bit-vec = { workspace = true, optional = true }
-chrono = { workspace = true, optional = true }
-ipnet = { workspace = true, optional = true }
-ipnetwork = { workspace = true, optional = true }
-mac_address = { workspace = true, optional = true }
-rust_decimal = { workspace = true, optional = true }
-time = { workspace = true, optional = true }
-uuid = { workspace = true, optional = true }
+# Type Integrations
+bigdecimal = { version = "0.4.0", optional = true }
+bit-vec = { version = "0.6.3", optional = true }
+chrono = { version = "0.4.34", default-features = false, features = ["std", "clock"], optional = true }
+ipnet = { version = "2.3.0", optional = true }
+ipnetwork = { version = "0.20.0", optional = true }
+mac_address = { version = "1.1.5", optional = true }
+rust_decimal = { version = "1.26.1", default-features = false, features = ["std"], optional = true }
+time = { version = "0.3.36", features = ["formatting", "parsing", "macros"], optional = true }
+uuid = { version = "1.1.2", optional = true }
 
 # Misc
 atoi = "2.0"
 base64 = { version = "0.22.0", default-features = false, features = ["std"] }
 bitflags = { version = "2", default-features = false }
 byteorder = { version = "1.4.3", default-features = false, features = ["std"] }
-dotenvy = { workspace = true }
+dotenvy = { version = "0.15.7", default-features = false }
 hex = "0.4.3"
 home = "0.5.5"
 itoa = "1.0.1"
@@ -74,16 +78,15 @@ serde = { version = "1.0.144", features = ["derive"] }
 serde_json = { version = "1.0.85", features = ["raw_value"] }
 
 [dependencies.sqlx-core]
-workspace = true
+version = "=0.8.6"
 # We use JSON in the driver implementation itself so there's no reason not to enable it here.
 features = ["json"]
-
-[dev-dependencies.sqlx]
-workspace = true
-features = ["postgres", "derive"]
 
 [target.'cfg(target_os = "windows")'.dependencies]
 etcetera = "0.8.0"
 
-[lints]
-workspace = true
+[lints.clippy]
+cast_possible_truncation = 'deny'
+cast_possible_wrap = 'deny'
+cast_sign_loss = 'deny'
+disallowed_methods = 'deny'
